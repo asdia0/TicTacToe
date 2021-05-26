@@ -1,78 +1,10 @@
 ﻿namespace TicTacToe
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    class Program
+    class Solve
     {
-        public static long nodeCount = 0;
-
-        public static Dictionary<string, int> TranspositionTable = new Dictionary<string, int>();
-
-        public static void Main(string[] args)
-        {
-            Play();
-        }
-
-        public static void Play()
-        {
-            int length, breadth, toWin;
-            bool first;
-
-            Console.Write("Length: ");
-            length = int.Parse(Console.ReadLine());
-            Console.Clear();
-
-            Console.Write("Breadth: ");
-            breadth = int.Parse(Console.ReadLine());
-            Console.Clear();
-
-            Console.Write("To Win: ");
-            toWin = int.Parse(Console.ReadLine());
-            Console.Clear();
-
-            Console.Write("First (Y/N): ");
-            first = Console.ReadLine().ToLower() == "y" ? true : false;
-            Console.Clear();
-
-            Game g = new Game(new Grid(length, breadth), toWin);
-
-            while (true)
-            {
-                Console.WriteLine(g.Grid);
-
-                if (g.Winner != null)
-                {
-                    Console.WriteLine($"Player {((bool)g.Winner ? 1 : 2)} won.");
-                    break;
-                }
-                if (!g.LegalMoves().Any())
-                {
-                    Console.WriteLine("It's a draw!");
-                    break;
-                }
-
-                if (g.Turn == first)
-                {
-                    int x, y;
-
-                    Console.Write("X: ");
-                    x = int.Parse(Console.ReadLine());
-
-                    Console.Write("Y: ");
-                    y = int.Parse(Console.ReadLine());
-                    Console.Clear();
-
-                    g.Play(x, y);
-                }
-                else
-                {
-                    g.Play(FindBestMove(g));
-                }
-            }
-        }
-
         public static (int, int) FindBestMove(Game game)
         {
             Game dummy = new Game(game);

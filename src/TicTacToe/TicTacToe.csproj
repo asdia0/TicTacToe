@@ -1,11 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>TicTacToe</RootNamespace>
     <AssemblyName>TicTacToe</AssemblyName>
-    <StartupObject>TicTacToe.Program</StartupObject>
+    <StartupObject></StartupObject>
+    <Authors>asdia0</Authors>
+    <Company>asdia0</Company>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Description>A [m,n,k game](https://en.wikipedia.org/wiki/M,n,k-game) solver.
+</Description>
+    <RepositoryUrl>https://github.com/asdia0/TicTacToe</RepositoryUrl>
+    <PackageTags>tictactoe</PackageTags>
+    <PackageId>Asdia.TicTacToe</PackageId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\Connect4\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
