@@ -13,7 +13,7 @@
 </Description>
     <RepositoryUrl>https://github.com/asdia0/TicTacToe</RepositoryUrl>
     <PackageTags>tictactoe</PackageTags>
-    <PackageId>Asdia.TicTacToe</PackageId>
+    <PackageId>Asdia0.TicTacToe</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
