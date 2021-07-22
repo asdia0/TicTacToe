@@ -6,7 +6,7 @@
     public struct Player
     {
         /// <summary>
-        /// Gets the unique identification number of the player.
+        /// Gets the unique identification number of the <see cref="Player"/>.
         /// </summary>
         public int ID { get; }
 
@@ -27,9 +27,9 @@
         }
 
         /// <summary>
-        /// Converts the player into a string.
+        /// Converts the <see cref="Player"/> into a <see cref="string"/>.
         /// </summary>
-        /// <returns>The string version of the player.</returns>
+        /// <returns>The <see cref="Player"/> as a <see cref="string"/>.</returns>
         public override string ToString()
         {
             return $"{this.ID} ({this.Name})";
