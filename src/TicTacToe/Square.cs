@@ -75,7 +75,7 @@
         /// <param name="grid">The <see cref="TicTacToe.Grid"/> the <see cref="Square"/> is on.</param>
         /// <param name="position">The <see cref="Square"/>'s <see cref="TicTacToe.Position"/> on the <see cref="TicTacToe.Grid"/>.</param>
         /// <param name="player">The <see cref="TicTacToe.Player"/> that played the <see cref="Square"/>.</param>
-        public Square(Grid grid, Position position, Player? player = null)
+        public Square(Grid grid, Player? player = null)
         {
             foreach (Square square in grid.Squares)
             {
