@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents a square on a <see cref="TicTacToe.Grid"/>.
     /// </summary>
-    public class Space
+    public class Square
 
     {
         /// <summary>
@@ -24,7 +24,7 @@
         private Grid _Grid;
 
         /// <summary>
-        /// Gets or sets the <see cref="Space"/>'s unique identification number.
+        /// Gets or sets the <see cref="Square"/>'s unique identification number.
         /// </summary>
         public int ID
         {
@@ -54,7 +54,7 @@
         }
 
         /// <summary>
-        /// Gets the <see cref="Space"/>'s <see cref="TicTacToe.Position"/> on the <see cref="TicTacToe.Grid"/>.
+        /// Gets the <see cref="Square"/>'s <see cref="TicTacToe.Position"/> on the <see cref="TicTacToe.Grid"/>.
         /// </summary>
         public Position Position
         {
@@ -68,7 +68,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="TicTacToe.Grid"/> the <see cref="Space"/> is on.
+        /// Gets or sets the <see cref="TicTacToe.Grid"/> the <see cref="Square"/> is on.
         /// </summary>
         public Grid Grid
         {
@@ -89,18 +89,18 @@
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="TicTacToe.Player"/> that played the <see cref="Space"/>.
+        /// Gets or sets the <see cref="TicTacToe.Player"/> that played the <see cref="Square"/>.
         /// </summary>
         public Player? Player { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Space"/> class.
+        /// Initializes a new instance of the <see cref="Square"/> class.
         /// </summary>
-        /// <param name="grid">The <see cref="TicTacToe.Grid"/> the <see cref="Space"/> is on.</param>
-        /// <param name="player">The <see cref="TicTacToe.Player"/> that played the <see cref="Space"/>.</param>
-        public Space(Grid grid, Player? player = null)
+        /// <param name="grid">The <see cref="TicTacToe.Grid"/> the <see cref="Square"/> is on.</param>
+        /// <param name="player">The <see cref="TicTacToe.Player"/> that played the <see cref="Square"/>.</param>
+        public Square(Grid grid, Player? player = null)
         {
-            foreach (Space square in grid.Squares)
+            foreach (Square square in grid.Squares)
             {
                 if (square.Position == this.Position)
                 {
@@ -114,9 +114,9 @@
         }
 
         /// <summary>
-        /// Converts the <see cref="Space"/> into a <see cref="string"/>.
+        /// Converts the <see cref="Square"/> into a <see cref="string"/>.
         /// </summary>
-        /// <returns>The <see cref="Space"/> as a <see cref="string"/>.</returns>
+        /// <returns>The <see cref="Square"/> as a <see cref="string"/>.</returns>
         public override string ToString()
         {
             return this.Player.ToString() ?? string.Empty;
