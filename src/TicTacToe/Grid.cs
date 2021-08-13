@@ -64,9 +64,9 @@
         }
 
         /// <summary>
-        /// Gets or sets a list of <see cref="Square"/>s on the <see cref="Grid"/>.
+        /// Gets or sets a list of <see cref="Space"/>s on the <see cref="Grid"/>.
         /// </summary>
-        public List<Square> Squares { get; set; }
+        public List<Space> Squares { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Grid"/> class.
@@ -81,7 +81,7 @@
 
             for (int i = 0; i < length * breadth; i++)
             {
-                this.Squares.Add(new Square(this));
+                this.Squares.Add(new Space(this));
             }
         }
 
