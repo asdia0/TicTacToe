@@ -85,10 +85,8 @@
                 }
             }
 
-            this.ID = grid.Squares.OrderBy(i => i.ID).Last().ID++;
-
             this.Grid = grid;
-            this.Position = position;
+            this.ID = grid.Squares.OrderBy(i => i.ID).Last().ID++;
             this.Player = player;
         }
 
