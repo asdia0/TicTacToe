@@ -120,5 +120,14 @@
         {
             this.Player = player;
         }
+
+        /// <summary>
+        /// Converts the <see cref="Square"/> into a <see cref="string"/>.
+        /// </summary>
+        /// <returns>The <see cref="Square"/> as a <see cref="string"/>.</returns>
+        public override string ToString()
+        {
+            return this.Player.ToString() ?? string.Empty;
+        }
     }
 }
