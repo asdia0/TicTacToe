@@ -34,7 +34,7 @@
             {
                 if (square.Position.X == this.Position.X || square.Position.Y == this.Position.Y)
                 {
-                    throw new Exception("Square already exists.");
+                    throw new TicTacToeException("Square already exists.");
                 }
             }
 
@@ -51,7 +51,7 @@
         {
             if (this.Player != null)
             {
-                throw new Exception("Player already exists!");
+                throw new TicTacToeException("Player already exists!");
             }
 
             this.ChangePlayer(player);
