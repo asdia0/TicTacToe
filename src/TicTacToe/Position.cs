@@ -1,5 +1,7 @@
 ﻿namespace TicTacToe
 {
+    using System;
+
     /// <summary>
     /// Defines a coordinate.
     /// </summary>
@@ -33,6 +35,27 @@
         public override string ToString()
         {
             return $"({this.X}, {this.Y})";
+        }
+
+        /// <summary>
+        /// Overrides <see cref="object.Equals(object?)"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare.</param>
+        /// <returns>Whether the <see cref="object"/>s are equal.</returns>
+        public override bool Equals(object obj)
+        {
+            return obj is Position position &&
+                   this.X == position.X &&
+                   this.Y == position.Y;
+        }
+
+        /// <summary>
+        /// Overrides <see cref="object.GetHashCode"/>.
+        /// </summary>
+        /// <returns>The <see cref="object"/>'s hash code.</returns>
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.X, this.Y);
         }
 
         /// <summary>
