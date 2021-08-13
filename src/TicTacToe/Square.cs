@@ -20,7 +20,7 @@
 
             set
             {
-                if (this.IDSet)
+                if (!this.IDSet)
                 {
                     if (value >= this.Grid.Length * this.Grid.Breadth)
                     {
