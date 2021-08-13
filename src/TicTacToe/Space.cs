@@ -103,7 +103,7 @@
         {
             foreach (Space square in grid.Squares)
             {
-                if (square.Position.X == this.Position.X || square.Position.Y == this.Position.Y)
+                if (square.Position == this.Position)
                 {
                     throw new TicTacToeException("Square already exists.");
                 }
