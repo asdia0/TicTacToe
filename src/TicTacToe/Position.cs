@@ -34,5 +34,27 @@
         {
             return $"({this.X}, {this.Y})";
         }
+
+        /// <summary>
+        /// Compares two <see cref="Position"/>s.
+        /// </summary>
+        /// <param name="p1">The first <see cref="Position"/> to compare.</param>
+        /// <param name="p2">The second <see cref="Position"/> to compare.</param>
+        /// <returns><c>true</c> if <paramref name="p1"/> is equal to <paramref name="p2"/>.</returns>
+        public static bool operator ==(Position p1, Position p2)
+        {
+            return p1.Equals(p2);
+        }
+
+        /// <summary>
+        /// Compares two <see cref="Position"/>s.
+        /// </summary>
+        /// <param name="p1">The first <see cref="Position"/> to compare.</param>
+        /// <param name="p2">The second <see cref="Position"/> to compare.</param>
+        /// <returns><c>true</c> if <paramref name="p1"/> is not equal to <paramref name="p2"/>.</returns>
+        public static bool operator !=(Position p1, Position p2)
+        {
+            return !p1.Equals(p2);
+        }
     }
 }
