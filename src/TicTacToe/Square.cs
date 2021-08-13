@@ -34,7 +34,7 @@
                     this._ID = value;
                 }
 
-                this.IDSet = false;
+                this.IDSet = true;
             }
         }
 
