@@ -97,7 +97,6 @@
         /// Initializes a new instance of the <see cref="Space"/> class.
         /// </summary>
         /// <param name="grid">The <see cref="TicTacToe.Grid"/> the <see cref="Space"/> is on.</param>
-        /// <param name="position">The <see cref="Space"/>'s <see cref="TicTacToe.Position"/> on the <see cref="TicTacToe.Grid"/>.</param>
         /// <param name="player">The <see cref="TicTacToe.Player"/> that played the <see cref="Space"/>.</param>
         public Space(Grid grid, Player? player = null)
         {
