@@ -1,7 +1,7 @@
 ﻿namespace TicTacToe
 {
     /// <summary>
-    /// Defines a player.
+    /// Defines a player participating in a <see cref="Game"/> of Tic-Tac-Toe.
     /// </summary>
     public struct Player
     {
@@ -11,15 +11,15 @@
         public int ID { get; }
 
         /// <summary>
-        /// Gets or sets the player's name.
+        /// Gets or sets the  <see cref="Player"/>'s name.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Player"/> struct.
         /// </summary>
-        /// <param name="id">The unqiue identification number of the player.</param>
-        /// <param name="name">The player's name.</param>
+        /// <param name="id">The unqiue identification number of the  <see cref="Player"/>.</param>
+        /// <param name="name">The  <see cref="Player"/>'s name.</param>
         public Player(int id, string name)
         {
             this.ID = id;
