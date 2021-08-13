@@ -9,8 +9,22 @@
     public class Square
     {
         /// <summary>
-             /// Gets or sets the <see cref="Square"/>'s unique identification number.
-             /// </summary>
+        /// Value determining whether <see cref="ID"/> has been set.
+        /// </summary>
+        private bool IDSet = false;
+
+        private int _ID;
+
+        /// <summary>
+        /// Value determining whether <see cref="Grid"/> has been set.
+        /// </summary>
+        private bool GridSet = false;
+
+        private Grid _Grid;
+
+        /// <summary>
+        /// Gets or sets the <see cref="Square"/>'s unique identification number.
+        /// </summary>
         public int ID
         {
             get
@@ -53,21 +67,30 @@
         }
 
         /// <summary>
-        /// Value determining whether <see cref="ID"/> has been set.
-        /// </summary>
-        private bool IDSet = false;
-
-        private int _ID;
-
-        /// <summary>
         /// Gets or sets the <see cref="TicTacToe.Grid"/> the <see cref="Square"/> is on.
         /// </summary>
-        private Grid Grid { get; set; }
+        public Grid Grid
+        {
+            get
+            {
+                return this._Grid;
+            }
+
+            set
+            {
+                if (!this.GridSet)
+                {
+                    this._Grid = value;
+                }
+
+                this.GridSet = true;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the <see cref="TicTacToe.Player"/> that played the <see cref="Square"/>.
         /// </summary>
-        private Player? Player { get; set; }
+        public Player? Player { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Square"/> class.
@@ -87,37 +110,6 @@
 
             this.Grid = grid;
             this.ID = grid.Squares.OrderBy(i => i.ID).Last().ID++;
-            this.Player = player;
-        }
-
-        /// <summary>
-        /// Adds a <see cref="TicTacToe.Player"/> to <see cref="Player"/>.
-        /// </summary>
-        /// <param name="player">The <see cref="TicTacToe.Player"/> to add.</param>
-        public void AddPlayer(Player player)
-        {
-            if (this.Player != null)
-            {
-                throw new TicTacToeException("Player already exists!");
-            }
-
-            this.ChangePlayer(player);
-        }
-
-        /// <summary>
-        /// Changes <see cref="Player"/> to <c>null</c>.
-        /// </summary>
-        public void RemovePlayer()
-        {
-            this.Player = null;
-        }
-
-        /// <summary>
-        /// Changes the value of <see cref="Player"/> to another <see cref="TicTacToe.Player"/>.
-        /// </summary>
-        /// <param name="player">The <see cref="TicTacToe.Player"/> to change to.</param>
-        public void ChangePlayer(Player player)
-        {
             this.Player = player;
         }
 
