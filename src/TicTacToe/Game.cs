@@ -296,6 +296,31 @@
         }
 
         /// <summary>
+        /// Gets a value indicating whether playing a <see cref="Move"/> at a certain <see cref="Position"/> results in a win.
+        /// </summary>
+        /// <param name="position">The position to test.</param>
+        /// <returns>A boolean.</returns>
+        public bool IsWinningMove(Position position)
+        {
+            // Game is already over => impossible to have winning move.
+            if (this.IsOver)
+            {
+                return false;
+            }
+
+            Game game = new(this);
+            game.Play(position);
+
+            // Game has winner => position resulted in win
+            if (game.Winner != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Evaluates the current <see cref="Game"/> state with respect to the current player. Only works with 2 players.
         /// </summary>
         /// <returns>The evaluation of the current <see cref="Game"/> state.</returns>
