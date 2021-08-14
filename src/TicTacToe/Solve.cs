@@ -16,7 +16,7 @@
         /// <param name="g">The position to find the best <see cref="Move"/> in.</param>
         /// <param name="depth">The amount of full moves to search.</param>
         /// <returns>(Position to play, the position's score).</returns>
-        public static (Position?, int) FindBestColumn(Game g, int depth)
+        public static (Position?, int) FindBestMove(Game g, int depth)
         {
             if (g.IsDraw || g.Winner != null || g.Players.Count != 2)
             {
