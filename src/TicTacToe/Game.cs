@@ -100,7 +100,9 @@
 
                             streaks.Add(squareList);
                         }
+#pragma warning disable
                         catch (IndexOutOfRangeException ex)
+#pragma warning restore
                         { }
                     }
                 }
@@ -122,7 +124,9 @@
 
                             streaks.Add(squareList);
                         }
+#pragma warning disable
                         catch (IndexOutOfRangeException ex)
+#pragma warning restore
                         { }
                     }
                 }
