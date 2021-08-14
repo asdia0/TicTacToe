@@ -99,14 +99,6 @@
         /// <param name="player">The <see cref="TicTacToe.Player"/> that played the <see cref="Square"/>.</param>
         public Square(Grid grid, Player? player = null)
         {
-            foreach (Square square in grid.Squares)
-            {
-                if (square.Position == this.Position)
-                {
-                    throw new TicTacToeException("Square already exists.");
-                }
-            }
-
             this.Grid = grid;
             this.ID = grid.Squares.Count == 0 ? 0 : grid.Squares.OrderBy(i => i.ID).Last().ID++;
             this.Player = player;
