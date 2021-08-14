@@ -299,7 +299,7 @@
         /// Evaluates the current <see cref="Game"/> state with respect to the current player. Only works with 2 players.
         /// </summary>
         /// <returns>The evaluation of the current <see cref="Game"/> state.</returns>
-        public int Evalutation()
+        public int Evaluation()
         {
             if (this.Players.Count != 2)
             {
