@@ -1,5 +1,7 @@
 ﻿namespace TicTacToe
 {
+    using System;
+
     /// <summary>
     /// Defines a player participating in a <see cref="Game"/> of Tic-Tac-Toe.
     /// </summary>
@@ -33,6 +35,49 @@
         public override string ToString()
         {
             return $"{this.ID} ({this.Name})";
+        }
+
+        /// <summary>
+        /// Overrides <see cref="object.Equals(object?)"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare.</param>
+        /// <returns>Whether the <see cref="object"/>s are equal.</returns>
+        public override bool Equals(object obj)
+        {
+            return obj is Player player &&
+                   this.ID == player.ID &&
+                   this.Name == player.Name;
+        }
+
+        /// <summary>
+        /// Overrides <see cref="object.GetHashCode"/>.
+        /// </summary>
+        /// <returns>The <see cref="object"/>'s hash code.</returns>
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.ID, this.Name);
+        }
+
+        /// <summary>
+        /// Compares two <see cref="Player"/>s.
+        /// </summary>
+        /// <param name="p1">The first <see cref="Player"/> to compare.</param>
+        /// <param name="p2">The second <see cref="Player"/> to compare.</param>
+        /// <returns><c>true</c> if <paramref name="p1"/> is equal to <paramref name="p2"/>.</returns>
+        public static bool operator ==(Player p1, Player p2)
+        {
+            return p1.Equals(p2);
+        }
+
+        /// <summary>
+        /// Compares two <see cref="Player"/>s.
+        /// </summary>
+        /// <param name="p1">The first <see cref="Player"/> to compare.</param>
+        /// <param name="p2">The second <see cref="Player"/> to compare.</param>
+        /// <returns><c>true</c> if <paramref name="p1"/> is not equal to <paramref name="p2"/>.</returns>
+        public static bool operator !=(Player p1, Player p2)
+        {
+            return !p1.Equals(p2);
         }
     }
 }
