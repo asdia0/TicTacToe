@@ -17,3 +17,9 @@ dotnet_diagnostic.SA1000.severity = none
 
 # SA1502: Element should not be on a single line
 dotnet_diagnostic.SA1502.severity = none
+
+# SA1501: Statement should not be on a single line
+dotnet_diagnostic.SA1501.severity = none
+
+# CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+dotnet_diagnostic.CS8632.severity = none
