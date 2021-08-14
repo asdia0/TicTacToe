@@ -7,7 +7,6 @@
     /// Represents a square on a <see cref="TicTacToe.Grid"/>.
     /// </summary>
     public class Square
-
     {
         /// <summary>
         /// Value determining whether <see cref="ID"/> has been set.
@@ -109,7 +108,7 @@
             }
 
             this.Grid = grid;
-            this.ID = grid.Squares.OrderBy(i => i.ID).Last().ID++;
+            this.ID = grid.Squares.Count == 0 ? 0 : grid.Squares.OrderBy(i => i.ID).Last().ID++;
             this.Player = player;
         }
 
