@@ -1,210 +1,112 @@
 ﻿namespace TicTacToe
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using static System.Math;
 
-    class Solve
+    /// <summary>
+    /// This class contains methods to find the best <see cref="Move"/>.
+    /// </summary>
+    public static class Solve
     {
-        public static (int, int) FindBestMove(Game game)
+        /// <summary>
+        /// Finds the best move from a given position.
+        /// </summary>
+        /// <param name="g">The position to find the best <see cref="Move"/> in.</param>
+        /// <param name="depth">The amount of full moves to search.</param>
+        /// <returns>(Position to play, the position's score).</returns>
+        public static (Position?, int) FindBestColumn(Game g, int depth)
         {
-            Game dummy = new Game(game);
-
-            List<(int, int)> legalMoves = dummy.LegalMoves();
-
-            // Win immediately
-            foreach ((int, int) move in legalMoves)
+            if (g.IsDraw || g.Winner != null || g.Players.Count != 2)
             {
-                dummy.Turn = game.Turn;
-                dummy.Play(move);
-
-                if (dummy.Winner != null)
-                {
-                    dummy.Undo(move);
-                    return move;
-                }
-
-                dummy.Undo(move);
+                throw new Exception("Invalid game");
             }
 
-            // Block opponent from immediately winning
-            dummy.Turn ^= true;
-
-            foreach ((int, int) move in legalMoves)
-            {
-                dummy.Play(move);
-
-                if (dummy.Winner != null)
-                {
-                    dummy.Undo(move);
-                    dummy.Turn ^= true;
-                    return move;
-                }
-
-                dummy.Undo(move);
-            }
-            dummy.Turn ^= true;
-
-            // Create fork (> 1 way to win)
-            int winCounter = 0;
-            foreach ((int, int) move in legalMoves)
-            {
-                dummy.Turn = game.Turn;
-                dummy.Play(move);
-
-                dummy.Turn ^= true;
-
-                foreach ((int, int) move2 in dummy.LegalMoves())
-                {
-                    dummy.Play(move2);
-
-                    if (dummy.Winner != null)
-                    {
-                        if (winCounter++ > 1)
-                        {
-                            dummy.Undo(move2);
-                            dummy.Turn ^= true;
-                            dummy.Undo(move);
-                            return move;
-                        }
-                    }
-
-                    dummy.Undo(move2);
-                }
-                dummy.Turn ^= true;
-
-                dummy.Undo(move);
-            }
-
-            // Block opponent from creating a fork
-            winCounter = 0;
-            dummy.Turn ^= true;
-            foreach ((int, int) move in legalMoves)
-            {
-                dummy.Turn = game.Turn;
-                dummy.Play(move);
-
-                dummy.Turn ^= true;
-
-                foreach ((int, int) move2 in dummy.LegalMoves())
-                {
-                    dummy.Play(move2);
-
-                    if (dummy.Winner != null)
-                    {
-                        if (winCounter++ > 1)
-                        {
-                            dummy.Undo(move2);
-                            dummy.Turn ^= true;
-                            dummy.Undo(move);
-                            dummy.Turn ^= true;
-                            return move;
-                        }
-                    }
-
-                    dummy.Undo(move2);
-                }
-                dummy.Turn ^= true;
-
-                dummy.Undo(move);
-            }
-            dummy.Turn ^= true;
-
-            // Create threat of a win/fork
-            foreach ((int, int) move in legalMoves)
-            {
-                dummy.Turn = game.Turn;
-                dummy.Play(move);
-
-                dummy.Turn ^= true;
-
-                foreach ((int, int) move2 in dummy.LegalMoves())
-                {
-                    dummy.Play(move2);
-
-                    if (dummy.Winner != null)
-                    {
-                        dummy.Undo(move2);
-                        dummy.Turn ^= true;
-                        dummy.Undo(move);
-                        return move;
-                    }
-
-                    dummy.Undo(move2);
-                }
-                dummy.Turn ^= true;
-
-                dummy.Undo(move);
-            }
-
-            // Block opponent from creating a threat of a win/fork
-            dummy.Turn ^= true;
-            foreach ((int, int) move in legalMoves)
-            {
-                dummy.Turn = game.Turn;
-                dummy.Play(move);
-
-                dummy.Turn ^= true;
-
-                foreach ((int, int) move2 in dummy.LegalMoves())
-                {
-                    dummy.Play(move2);
-
-                    if (dummy.Winner != null)
-                    {
-                        dummy.Undo(move2);
-                        dummy.Turn ^= true;
-                        dummy.Undo(move);
-                        dummy.Turn ^= true;
-                        return move;
-                    }
-
-                    dummy.Undo(move2);
-                }
-                dummy.Turn ^= true;
-
-                dummy.Undo(move);
-            }
-            dummy.Turn ^= true;
-
-            // Best advantage
-            return MostAdvantage(game);
+            return AlphaBetaPruning(g, 2 * depth, int.MinValue, int.MaxValue);
         }
 
-        public static (int, int) MostAdvantage(Game game)
+        /// <summary>
+        /// An implementation of the alpha-beta pruning algorithm.
+        /// </summary>
+        /// <param name="game">The game to solve.</param>
+        /// <param name="depth">The amount of full moves to search through.</param>
+        /// <param name="alpha">The value of alpha (maximising player).</param>
+        /// <param name="beta">The value of beta (minimising player).</param>
+        /// <returns>The position of the best <see cref="Move"/> and its evaluation.</returns>
+        private static (Position?, int) AlphaBetaPruning(Game game, int depth, int alpha, int beta)
         {
-            Dictionary<(int, int), int> scores = new Dictionary<(int, int), int>();
+            bool maxPlayer = game.Turn == game.Players[0];
 
-            Game dummy = new Game(game);
+            List<Position> children = game.Grid.Squares.Where(i => i.Player == null).Select(i => i.Position).ToList();
 
-            if (game.Turn)
+            if (game.IsDraw)
             {
-                // maximise
+                return (null, 0);
+            }
 
-                foreach ((int, int) move in dummy.LegalMoves())
+            foreach (Position child in children)
+            {
+                if (game.IsWinningMove(child))
                 {
-                    dummy.Play(move);
+                    return (child, maxPlayer ? int.MaxValue : int.MinValue);
+                }
+            }
 
-                    scores.Add(move, dummy.Evalutation());
+            if (depth == 0)
+            {
+                return (null, game.Evaluation());
+            }
 
-                    dummy.Undo(move);
+            if (maxPlayer)
+            {
+                int value = int.MinValue;
+                Dictionary<Position, int> scores = new();
+
+                foreach (Position child in children)
+                {
+                    Game opp = new(game);
+                    opp.Play(child);
+                    int score = AlphaBetaPruning(opp, depth - 1, alpha, beta).Item2;
+                    scores.Add(child, score);
+                    if (score > value)
+                    {
+                        value = score;
+                    }
+
+                    alpha = Max(alpha, value);
+                    if (alpha >= beta)
+                    {
+                        break;
+                    }
                 }
 
-                return scores.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+                return (scores.Aggregate((l, r) => l.Value > r.Value ? l : r).Key, value);
             }
             else
             {
-                // minimise
+                int value = int.MaxValue;
+                Dictionary<Position, int> scores = new();
 
-                foreach ((int, int) move in dummy.LegalMoves())
+                foreach (Position child in children)
                 {
-                    dummy.Play(move);
+                    Game opp = new(game);
+                    opp.Play(child);
+                    int score = AlphaBetaPruning(opp, depth - 1, alpha, beta).Item2;
+                    scores.Add(child, score);
+                    if (score < value)
+                    {
+                        value = score;
+                    }
 
-                    scores.Add(move, dummy.Evalutation());
-
-                    dummy.Undo(move);
+                    beta = Max(beta, value);
+                    if (alpha >= beta)
+                    {
+                        break;
+                    }
                 }
 
-                return scores.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
+                return (scores.Aggregate((l, r) => l.Value > r.Value ? l : r).Key, value);
             }
         }
     }
