@@ -399,7 +399,7 @@
                 p2[i] = square.Player == 1;
             }
 
-            return new List<bool[]> { both, p2, p2 };
+            return new List<bool[]> { both, p1, p2 };
         }
     }
 }
