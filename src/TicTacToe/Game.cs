@@ -325,7 +325,7 @@
         /// Evaluates the current <see cref="Game"/> state with respect to the current player. Only works with 2 players.
         /// </summary>
         /// <returns>The evaluation of the current <see cref="Game"/> state.</returns>
-        public int Evaluation()
+        public int Evaluation(int player)
         {
             if (this.Players != 2)
             {
@@ -342,7 +342,7 @@
             if (this.Winner != null)
             {
                 // Current player won.
-                if (this.Winner == this.Turn)
+                if (this.Winner == player)
                 {
                     return int.MaxValue;
                 }
@@ -352,7 +352,7 @@
             }
 
             // Evaluate the current position.
-            // If a streak only has one player in it (excluding `null), assign it a value.
+            // If a streak only has one player in it (excluding `null`), assign it a value.
             // The more tokens in the streak, the better.
             // Assignment uses 2^x, where x is the number of tokens placed.
             // This value is negated if the opponent is the player that placed those tokens.
@@ -365,7 +365,7 @@
                 if (players.Distinct().Count() == 1)
                 {
                     int value = (int)Math.Pow(2, streak.Where(i => i.Player != null).Count());
-                    int multiplier = (players[0] == this.Turn) ? 1 : -1;
+                    int multiplier = (players[0] == player) ? 1 : -1;
 
                     evaluation += multiplier * value;
                 }

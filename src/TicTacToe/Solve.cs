@@ -37,6 +37,7 @@
         private static (Position?, int) AlphaBetaPruning(Game game, int depth, int alpha, int beta)
         {
             bool maxPlayer = game.Turn == 0;
+            int player = maxPlayer ? 0 : 1;
 
             List<Position> children = game.Grid.Squares.Where(i => i.Player == null).Select(i => i.Position).ToList();
 
@@ -55,7 +56,7 @@
 
             if (depth == 0)
             {
-                return (null, game.Evaluation());
+                return (null, game.Evaluation(player));
             }
 
             if (maxPlayer)
