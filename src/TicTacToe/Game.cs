@@ -200,7 +200,7 @@
             {
                 throw new TicTacToeException("Game.ToWin too small.");
             }
-            else if (grid.Breadth > toWin && grid.Length > toWin)
+            else if (grid.Breadth < toWin && grid.Length < toWin)
             {
                 throw new TicTacToeException("Number of tokens to win too big.");
             }
