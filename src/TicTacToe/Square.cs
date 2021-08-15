@@ -100,7 +100,7 @@
         public Square(Grid grid, Player? player = null)
         {
             this.Grid = grid;
-            this.ID = grid.Squares.Count == 0 ? 0 : grid.Squares.OrderBy(i => i.ID).Last().ID++;
+            this.ID = this.Grid.Squares.Count;
             this.Player = player;
         }
 
