@@ -18,7 +18,7 @@
         /// <returns>(Position to play, the position's score).</returns>
         public static (Position?, int) FindBestMove(Game g, int depth)
         {
-            if (g.IsDraw || g.Winner != null || g.Players.Count != 2)
+            if (g.IsDraw || g.Winner != null || g.Players != 2)
             {
                 throw new Exception("Invalid game");
             }
@@ -36,7 +36,7 @@
         /// <returns>The position of the best <see cref="Move"/> and its evaluation.</returns>
         private static (Position?, int) AlphaBetaPruning(Game game, int depth, int alpha, int beta)
         {
-            bool maxPlayer = game.Turn == game.Players[0];
+            bool maxPlayer = game.Turn == 0;
 
             List<Position> children = game.Grid.Squares.Where(i => i.Player == null).Select(i => i.Position).ToList();
 
