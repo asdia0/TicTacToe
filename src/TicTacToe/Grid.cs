@@ -1,6 +1,7 @@
 ﻿namespace TicTacToe
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Represents a grid a <see cref="Game"/> of Tic-Tac-Toe is played on.
@@ -93,7 +94,7 @@
         {
             this.Length = grid.Length;
             this.Breadth = grid.Breadth;
-            this.Squares = grid.Squares;
+            this.Squares = grid.Squares.ToList();
         }
 
         /// <summary>
