@@ -374,32 +374,5 @@
 
             return evaluation;
         }
-
-        /// <summary>
-        /// Converts the <see cref="Grid"/> into a bitboard.
-        /// </summary>
-        /// <returns>A <see cref="List{T}"/> of arrays of <see cref="bool"/>eans.</returns>
-        public List<bool[]> ToBitBoard()
-        {
-            if (this.Players != 2)
-            {
-                throw new TicTacToeException("Number of players must be 2 for conversion to work.");
-            }
-
-            bool[] both = new bool[this.Grid.Length * this.Grid.Breadth];
-            bool[] p1 = new bool[this.Grid.Length * this.Grid.Breadth];
-            bool[] p2 = new bool[this.Grid.Length * this.Grid.Breadth];
-
-            for (int i = 0; i < this.Grid.Length * this.Grid.Breadth; i++)
-            {
-                Square square = this.Grid.Squares[i];
-
-                both[i] = square.Player != null;
-                p1[i] = square.Player == 0;
-                p2[i] = square.Player == 1;
-            }
-
-            return new List<bool[]> { both, p2, p2 };
-        }
     }
 }
