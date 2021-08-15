@@ -366,7 +366,7 @@
                 if (players.Distinct().Count() == 1)
                 {
                     int value = (int)Math.Pow(2, streak.Where(i => i.Player != null).Count());
-                    int multiplier = (players[0] == player) ? 1 : -1;
+                    int multiplier = (this.Turn == player) ? -1 : 1;
 
                     evaluation += multiplier * value;
                 }
