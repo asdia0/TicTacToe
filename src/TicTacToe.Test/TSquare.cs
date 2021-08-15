@@ -11,7 +11,7 @@ namespace TicTacToe.Test
     public class TSquare
     {
         /// <summary>
-        /// Tests if the <see cref="Square.ID"/> is correctly assigned.
+        /// Tests if <see cref="Square.ID"/> is correctly assigned.
         /// </summary>
         [TestMethod]
         public void ID()
@@ -28,7 +28,7 @@ namespace TicTacToe.Test
         }
 
         /// <summary>
-        /// Tests if the <see cref="Square.ID"/> does not change when attempting to manually assign it.
+        /// Tests if <see cref="Square.ID"/> does not change when attempting to manually assign it.
         /// </summary>
         [TestMethod]
         public void SetID()
@@ -81,7 +81,7 @@ namespace TicTacToe.Test
         }
 
         /// <summary>
-        /// Tests if the <see cref="Square.Grid"/> is correctly assigned.
+        /// Tests if <see cref="Square.Grid"/> is correctly assigned.
         /// </summary>
         [TestMethod]
         public void Grid()
@@ -97,7 +97,7 @@ namespace TicTacToe.Test
         }
 
         /// <summary>
-        /// Tests if the <see cref="Square.Grid"/> does not change when attempting to manually assign it.
+        /// Tests if <see cref="Square.Grid"/> does not change when attempting to manually assign it.
         /// </summary>
         [TestMethod]
         public void SetGrid()
@@ -123,7 +123,7 @@ namespace TicTacToe.Test
         }
 
         /// <summary>
-        /// Tests if the <see cref="Square.Grid"/> is correctly assigned as <c>null</c> initially.
+        /// Tests if <see cref="Square.Grid"/> is correctly assigned as <c>null</c> initially.
         /// </summary
         [TestMethod]
         public void PlayerNull()
@@ -139,7 +139,7 @@ namespace TicTacToe.Test
         }
 
         /// <summary>
-        /// Tests if the <see cref="Square.Grid"/> is correctly assigned when <see cref="Game.Play(TicTacToe.Position)"/> is called.
+        /// Tests if <see cref="Square.Grid"/> is correctly assigned when <see cref="Game.Play(TicTacToe.Position)"/> is called.
         /// </summary
         [TestMethod]
         public void PlayerNonnull()
