@@ -324,6 +324,7 @@
         /// <summary>
         /// Evaluates the current <see cref="Game"/> state with respect to the current player. Only works with 2 players.
         /// </summary>
+        /// <param name="player">The player to evaluate as.</param>
         /// <returns>The evaluation of the current <see cref="Game"/> state.</returns>
         public int Evaluation(int player)
         {
