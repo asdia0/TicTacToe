@@ -94,7 +94,12 @@
         {
             this.Length = grid.Length;
             this.Breadth = grid.Breadth;
-            this.Squares = grid.Squares.ToList();
+            this.Squares = new();
+
+            foreach (Square square in grid.Squares)
+            {
+                this.Squares.Add(new(this, square.Player));
+            }
         }
 
         /// <summary>
