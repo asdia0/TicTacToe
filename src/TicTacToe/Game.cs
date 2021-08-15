@@ -163,7 +163,7 @@
                 }
 
                 // No empty square and no winner
-                if (this.Grid.Squares.Where(i => i.Player == null).Any())
+                if (!this.Grid.Squares.Where(i => i.Player == null).Any())
                 {
                     return true;
                 }
