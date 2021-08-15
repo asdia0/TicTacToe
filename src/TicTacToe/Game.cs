@@ -52,48 +52,34 @@
                 // Rows
                 for (int y = 0; y < this.Grid.Breadth; y++)
                 {
-                    for (int x = 0; x < this.Grid.Length - this.ToWin + 1; x++)
-                    {
-                        int initialID = (this.Grid.Length * y) + x;
-                        List<Square> squareList = new();
-
-                        for (int j = 0; j < this.ToWin; j++)
-                        {
-                            squareList.Add(this.Grid.Squares.Where(i => i.ID == initialID + j).FirstOrDefault());
-                        }
-
-                        streaks.Add(squareList);
-                    }
-                }
-
-                // Columns
-                for (int y = 0; y < this.Grid.Breadth - this.ToWin + 1; y++)
-                {
                     for (int x = 0; x < this.Grid.Length; x++)
                     {
-                        int initialID = (this.Grid.Length * y) + x;
+                        Position currentPos = this.Grid.Squares.Where(i => i.ID == (this.Grid.Length * y) + x).FirstOrDefault().Position;
                         List<Square> squareList = new();
 
                         for (int j = 0; j < this.ToWin; j++)
                         {
-                            squareList.Add(this.Grid.Squares.Where(i => i.ID == initialID + (this.Grid.Length * j)).FirstOrDefault());
+                            squareList.Add(this.Grid.Squares.Where(i => i.Position == new Position(currentPos.X, currentPos.Y + j)).FirstOrDefault());
                         }
 
-                        streaks.Add(squareList);
+                        if (!squareList.Contains(null))
+                        {
+                            streaks.Add(squareList);
+                        }
                     }
                 }
 
-                // Negative diagonal
+                // Column
                 for (int y = 0; y < this.Grid.Breadth; y++)
                 {
                     for (int x = 0; x < this.Grid.Length; x++)
                     {
-                        int initialID = (this.Grid.Length * y) + x;
+                        Position currentPos = this.Grid.Squares.Where(i => i.ID == (this.Grid.Length * y) + x).FirstOrDefault().Position;
                         List<Square> squareList = new();
 
                         for (int j = 0; j < this.ToWin; j++)
                         {
-                            squareList.Add(this.Grid.Squares.Where(i => i.ID == initialID + ((this.Grid.Length + 1) * j)).FirstOrDefault());
+                            squareList.Add(this.Grid.Squares.Where(i => i.Position == new Position(currentPos.X + j, currentPos.Y)).FirstOrDefault());
                         }
 
                         if (!squareList.Contains(null))
@@ -108,12 +94,12 @@
                 {
                     for (int x = 0; x < this.Grid.Length; x++)
                     {
-                        int initialID = (this.Grid.Length * y) + x;
+                        Position currentPos = this.Grid.Squares.Where(i => i.ID == (this.Grid.Length * y) + x).FirstOrDefault().Position;
                         List<Square> squareList = new();
 
                         for (int j = 0; j < this.ToWin; j++)
                         {
-                            squareList.Add(this.Grid.Squares.Where(i => i.ID == initialID - ((this.Grid.Length + 1) * j)).FirstOrDefault());
+                            squareList.Add(this.Grid.Squares.Where(i => i.Position == new Position(currentPos.X + j, currentPos.Y + j)).FirstOrDefault());
                         }
 
                         if (!squareList.Contains(null))
@@ -123,7 +109,27 @@
                     }
                 }
 
-                return streaks;
+                // Negative diagonal
+                for (int y = 0; y < this.Grid.Breadth; y++)
+                {
+                    for (int x = 0; x < this.Grid.Length; x++)
+                    {
+                        Position currentPos = this.Grid.Squares.Where(i => i.ID == (this.Grid.Length * y) + x).FirstOrDefault().Position;
+                        List<Square> squareList = new();
+
+                        for (int j = 0; j < this.ToWin; j++)
+                        {
+                            squareList.Add(this.Grid.Squares.Where(i => i.Position == new Position(currentPos.X + j, currentPos.Y - j)).FirstOrDefault());
+                        }
+
+                        if (!squareList.Contains(null))
+                        {
+                            streaks.Add(squareList);
+                        }
+                    }
+                }
+
+                return streaks.Distinct().ToList();
             }
         }
 
