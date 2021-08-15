@@ -45,9 +45,7 @@ namespace TicTacToe.Test
                 {
                     square.ID++;
                 }
-#pragma warning disable
-                catch (TicTacToeException ex)
-#pragma warning restore
+                catch (TicTacToeException)
                 { }
 
                 Assert.AreEqual(i, square.ID);
@@ -113,9 +111,7 @@ namespace TicTacToe.Test
                 {
                     square.Grid = fakeGrid;
                 }
-#pragma warning disable
-                catch (TicTacToeException ex)
-#pragma warning restore
+                catch (TicTacToeException)
                 { }
 
                 Assert.AreEqual(realGrid, square.Grid);

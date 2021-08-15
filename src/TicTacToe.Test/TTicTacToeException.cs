@@ -22,9 +22,7 @@ namespace TicTacToe.Test
             {
                 throw new TicTacToeException();
             }
-#pragma warning disable
-            catch (TicTacToeException ex)
-#pragma warning restore
+            catch (TicTacToeException)
             {
                 succeeded = true;
             }
