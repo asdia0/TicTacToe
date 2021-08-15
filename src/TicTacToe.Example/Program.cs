@@ -9,7 +9,6 @@
     {
         static void Main()
         {
-            // TODO: Implement hash table for various depths
             int length = 3;
             int breadth = 3;
             Grid grid = new(length, breadth);
