@@ -165,7 +165,7 @@
                 }
 
                 // No empty square and no winner
-                if (this.Grid.Squares.Where(i => i.Player == null).Count() == 0)
+                if (this.Grid.Squares.Where(i => i.Player == null).Any())
                 {
                     return true;
                 }
