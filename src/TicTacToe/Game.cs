@@ -52,7 +52,7 @@
                 // Rows
                 for (int y = 0; y < this.Grid.Breadth; y++)
                 {
-                    for (int x = 0; x < this.Grid.Length - this.ToWin; x++)
+                    for (int x = 0; x < this.Grid.Length - this.ToWin + 1; x++)
                     {
                         int initialID = (this.Grid.Length * y) + x;
                         List<Square> squareList = new();
@@ -67,7 +67,7 @@
                 }
 
                 // Columns
-                for (int y = 0; y < this.Grid.Breadth - this.ToWin; y++)
+                for (int y = 0; y < this.Grid.Breadth - this.ToWin + 1; y++)
                 {
                     for (int x = 0; x < this.Grid.Length; x++)
                     {
@@ -88,20 +88,18 @@
                 {
                     for (int x = 0; x < this.Grid.Length; x++)
                     {
-                        try
+                        int initialID = (this.Grid.Length * y) + x;
+                        List<Square> squareList = new();
+
+                        for (int j = 0; j < this.ToWin; j++)
                         {
-                            int initialID = (this.Grid.Length * y) + x;
-                            List<Square> squareList = new();
+                            squareList.Add(this.Grid.Squares.Where(i => i.ID == initialID + ((this.Grid.Length + 1) * j)).FirstOrDefault());
+                        }
 
-                            for (int j = 0; j < this.ToWin; j++)
-                            {
-                                squareList.Add(this.Grid.Squares.Where(i => i.ID == initialID + (this.Grid.Length * j) + 1).FirstOrDefault());
-                            }
-
+                        if (!squareList.Contains(null))
+                        {
                             streaks.Add(squareList);
                         }
-                        catch (IndexOutOfRangeException)
-                        { }
                     }
                 }
 
@@ -110,20 +108,18 @@
                 {
                     for (int x = 0; x < this.Grid.Length; x++)
                     {
-                        try
+                        int initialID = (this.Grid.Length * y) + x;
+                        List<Square> squareList = new();
+
+                        for (int j = 0; j < this.ToWin; j++)
                         {
-                            int initialID = (this.Grid.Length * y) + x;
-                            List<Square> squareList = new();
+                            squareList.Add(this.Grid.Squares.Where(i => i.ID == initialID - ((this.Grid.Length + 1) * j)).FirstOrDefault());
+                        }
 
-                            for (int j = 0; j < this.ToWin; j++)
-                            {
-                                squareList.Add(this.Grid.Squares.Where(i => i.ID == initialID + (this.Grid.Length * j) - 1).FirstOrDefault());
-                            }
-
+                        if (!squareList.Contains(null))
+                        {
                             streaks.Add(squareList);
                         }
-                        catch (IndexOutOfRangeException)
-                        { }
                     }
                 }
 
