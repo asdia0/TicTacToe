@@ -10,9 +10,9 @@
     public class Game
     {
         /// <summary>
-        /// Gets or sets the <see cref="List{T}"/> of <see cref="Player"/>s participating in the <see cref="Game"/>.
+        /// Gets or sets the number of players participating in the <see cref="Game"/>.
         /// </summary>
-        public List<Player> Players { get; set; }
+        public int Players { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="TicTacToe.Grid"/> the <see cref="Game"/> is being played on.
@@ -25,13 +25,13 @@
         public int ToWin { get; set; }
 
         /// <summary>
-        /// Gets the current <see cref="Player"/> to move.
+        /// Gets the current player to move.
         /// </summary>
-        public Player Turn
+        public int Turn
         {
             get
             {
-                return this.Players[this.MoveList.Count % this.Players.Count];
+                return this.MoveList.Count % this.Players;
             }
         }
 
@@ -176,15 +176,15 @@
         }
 
         /// <summary>
-        /// Gets the <see cref="Player"/> that won the <see cref="Game"/>.
+        /// Gets the player that won the <see cref="Game"/>.
         /// </summary>
-        public Player? Winner
+        public int? Winner
         {
             get
             {
                 foreach (List<Square> streak in this.Streaks)
                 {
-                    (bool succeed, Player? winner) = this.CheckForWinner(streak);
+                    (bool succeed, int? winner) = this.CheckForWinner(streak);
 
                     if (succeed)
                     {
@@ -200,9 +200,9 @@
         /// Initializes a new instance of the <see cref="Game"/> class.
         /// </summary>
         /// <param name="grid">The <see cref="TicTacToe.Grid"/> the <see cref="Game"/> is being played on.</param>
-        /// <param name="players">The <see cref="List{T}"/> of <see cref="Player"/>s participating in the <see cref="Game"/>.</param>
+        /// <param name="players">The number of players participating in the <see cref="Game"/>.</param>
         /// <param name="toWin">The number of tokens needed in a row to win.</param>
-        public Game(Grid grid, List<Player> players, int toWin)
+        public Game(Grid grid, int players, int toWin)
         {
             if (toWin < 1)
             {
@@ -231,11 +231,11 @@
         }
 
         /// <summary>
-        /// Checks if a <see cref="List{T}"/> of <see cref="Square"/>s have been played by the same <see cref="Player"/>.
+        /// Checks if a <see cref="List{T}"/> of <see cref="Square"/>s have been played by the same player.
         /// </summary>
         /// <param name="streak">The <see cref="List{T}"/> of <see cref="Square"/>s to check.</param>
-        /// <returns>A tuple. The first item indicates if there is a winner. The second item contains the <see cref="Player"/> that won.</returns>
-        public (bool, Player?) CheckForWinner(List<Square> streak)
+        /// <returns>A tuple. The first item indicates if there is a winner. The second item contains the player that won.</returns>
+        public (bool, int?) CheckForWinner(List<Square> streak)
         {
             if (streak.Count != this.ToWin)
             {
@@ -326,7 +326,7 @@
         /// <returns>The evaluation of the current <see cref="Game"/> state.</returns>
         public int Evaluation()
         {
-            if (this.Players.Count != 2)
+            if (this.Players != 2)
             {
                 throw new TicTacToeException("Number of players must be 2 for evaluation to work.");
             }
@@ -341,7 +341,7 @@
             if (this.Winner != null)
             {
                 // Current player won.
-                if ((Player)this.Winner == this.Turn)
+                if (this.Winner == this.Turn)
                 {
                     return int.MaxValue;
                 }
@@ -359,7 +359,7 @@
 
             foreach (List<Square> streak in this.Streaks)
             {
-                List<Player?> players = streak.Where(i => i.Player != null).Select(i => i.Player).ToList();
+                List<int?> players = streak.Where(i => i.Player != null).Select(i => i.Player).ToList();
 
                 if (players.Distinct().Count() == 1)
                 {

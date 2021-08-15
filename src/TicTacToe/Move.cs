@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets the player that made the <see cref="Move"/>.
         /// </summary>
-        public Player Player { get; }
+        public int Player { get; }
 
         /// <summary>
         /// Gets the position of the <see cref="Move"/> made.
@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="player">The player that made the <see cref="Move"/>.</param>
         /// <param name="position">The position of the <see cref="Move"/> made.</param>
-        public Move(Player player, Position position)
+        public Move(int player, Position position)
         {
             this.Player = player;
             this.Position = position;

@@ -88,16 +88,16 @@
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="TicTacToe.Player"/> that played the <see cref="Square"/>.
+        /// Gets or sets the player that played the <see cref="Square"/>.
         /// </summary>
-        public Player? Player { get; set; }
+        public int? Player { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Square"/> class.
         /// </summary>
         /// <param name="grid">The <see cref="TicTacToe.Grid"/> the <see cref="Square"/> is on.</param>
-        /// <param name="player">The <see cref="TicTacToe.Player"/> that played the <see cref="Square"/>.</param>
-        public Square(Grid grid, Player? player = null)
+        /// <param name="player">The player that played the <see cref="Square"/>.</param>
+        public Square(Grid grid, int? player = null)
         {
             this.Grid = grid;
             this.ID = this.Grid.Squares.Count;
