@@ -223,6 +223,7 @@
         /// <param name="game">The <see cref="Game"/> to clone.</param>.
         public Game(Game game)
         {
+            this.Players = game.Players;
             this.Grid = new Grid(game.Grid);
             this.ToWin = game.ToWin;
             this.MoveList = game.MoveList.ToList();
@@ -240,7 +241,9 @@
                 throw new Exception("Number of squares must be equal to the number of squares required to win.");
             }
 
-            if (streak.Where(i => i.Player != null).Select(i => i.Player).Distinct().Count() == 1)
+            List<int?> players = streak.Where(i => i.Player != null).Select(i => i.Player).ToList();
+
+            if (players.Distinct().Count() == 1 && players.Count == this.ToWin)
             {
                 return (true, streak.First().Player);
             }
