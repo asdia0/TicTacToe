@@ -1,6 +1,6 @@
-# TicTacToe
+# Status: `UNMAINTAINED`
 
-![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)
+# TicTacToe
 
 An [m,n,k game](https://en.wikipedia.org/wiki/M,n,k-game) solver.
 
